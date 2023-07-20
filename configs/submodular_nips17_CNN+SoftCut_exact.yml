@@ -1,0 +1,19 @@
+# submodular_nips17_CNN+CN.yml
+
+params:
+    max_epochs: 100
+    optimizer: "Adam"
+    learning_rate: 0.001
+    batch_size: 1
+    crop_images_to_min_during_training: False
+    dataset: "weizmann_horse_rgb"
+    ds_splits:
+        - 180 # Training
+        - 50  # Validation
+        - 98  # Test
+    reveled_labels: 0.001
+    loss_function: "binary_cross_entropy_with_logits"
+    accuracy_threshold: 0.5
+    use_multiple_threads_for_graph_cut: False
+    monitored_quantity_for_checkpoints: "val_loss"
+    seed: 1234

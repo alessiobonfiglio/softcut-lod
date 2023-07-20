@@ -1,0 +1,38 @@
+# submodular_nips17_CNN+CN.yml
+
+images_to_log: 300
+log_debug_image: True
+track_grad_norm: 2 #-1 for disable the tracking
+save_debug_checkpoint: False
+
+params:
+    max_epochs: 100
+    optimizer: "Adam"
+    learning_rate: 0.001
+    batch_size: 32
+    dataset: "cityscapes_traffic_signs_downsampled"
+    tiling_factor:
+    ds_splits:
+        - 13078 # Training
+        #- 50  # Validation
+        #- 98  # Test
+    shuffle_training_set: True
+    limit_train_batches: 156 # 1.0 means use the whole training set
+    segmentation_architecture: "Unet"
+    use_class_weights: "linear"
+    class_weights: [0.8680441492295214, 0.1319558507704785] # [positive weight, negative weight]
+    encoder: "resnet18"
+    encoder_weights:
+    encoder_depth: 5
+    num_epochs_before_fine_tuning: #None to disable fine tuning and so use 'encoder_weights' just as an initialization
+    encoder_lr_during_finetuning: 0.0001
+    enable_graphcut: True
+    reveled_labels: 1.0
+    loss_function: "dice_loss"
+    accuracy_threshold: 0.5
+    gradient_clip_value: 0.0 # value to clip the gradient norm (0.0 -> disabled)
+    skip_connection_at_graphcut: False
+    max_tv_iters: 0 #default is 35 (0 or les is the same)
+    use_multiple_threads_for_graph_cut: True
+    monitored_quantity_for_checkpoints: "val_loss"
+    seed: 1234
